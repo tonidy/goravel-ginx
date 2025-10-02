@@ -14,7 +14,7 @@ var config = `map[string]any{
         "body_limit": 4096,
         "header_limit": 4096,
         "route": func() (route.Route, error) {
-            return ginfacades.Route("ginx"), nil
+            return ginxfacades.Route("ginx"), nil
         },
         // Optional, default is http/template
         "template": func() (render.HTMLRender, error) {
@@ -32,7 +32,7 @@ func main() {
 				Find(match.Imports()).
 				Modify(
 					modify.AddImport("github.com/goravel/framework/contracts/route"), modify.AddImport(packages.GetModulePath()),
-					modify.AddImport("github.com/tonidy/goravel-ginx/facades", "ginfacades"), modify.AddImport("github.com/gin-gonic/gin/render"),
+					modify.AddImport("github.com/tonidy/goravel-ginx/facades", "ginxfacades"), modify.AddImport("github.com/gin-gonic/gin/render"),
 				).
 				Find(match.Config("http.drivers")).Modify(modify.AddConfig("ginx", config)).
 				Find(match.Config("http")).Modify(modify.AddConfig("default", `"ginx"`)),
@@ -47,7 +47,7 @@ func main() {
 				Find(match.Imports()).
 				Modify(
 					modify.RemoveImport("github.com/goravel/framework/contracts/route"), modify.RemoveImport(packages.GetModulePath()),
-					modify.RemoveImport("github.com/tonidy/goravel-ginx/facades", "ginfacades"), modify.RemoveImport("github.com/gin-gonic/gin/render"),
+					modify.RemoveImport("github.com/tonidy/goravel-ginx/facades", "ginxfacades"), modify.RemoveImport("github.com/gin-gonic/gin/render"),
 				),
 		).
 		Execute()
