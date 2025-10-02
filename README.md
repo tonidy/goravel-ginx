@@ -1,10 +1,10 @@
 # Gin
 
-[![Doc](https://pkg.go.dev/badge/github.com/goravel/gin)](https://pkg.go.dev/github.com/goravel/gin)
+[![Doc](https://pkg.go.dev/badge/github.com/tonidy/goravel-ginx)](https://pkg.go.dev/github.com/tonidy/goravel-ginx)
 [![Go](https://img.shields.io/github/go-mod/go-version/goravel/gin)](https://go.dev/)
-[![Release](https://img.shields.io/github/release/goravel/gin.svg)](https://github.com/goravel/gin/releases)
-[![Test](https://github.com/goravel/gin/actions/workflows/test.yml/badge.svg)](https://github.com/goravel/gin/actions)
-[![Report Card](https://goreportcard.com/badge/github.com/goravel/gin)](https://goreportcard.com/report/github.com/goravel/gin)
+[![Release](https://img.shields.io/github/release/goravel/gin.svg)](https://github.com/tonidy/goravel-ginx/releases)
+[![Test](https://github.com/tonidy/goravel-ginx/actions/workflows/test.yml/badge.svg)](https://github.com/tonidy/goravel-ginx/actions)
+[![Report Card](https://goreportcard.com/badge/github.com/tonidy/goravel-ginx)](https://goreportcard.com/report/github.com/tonidy/goravel-ginx)
 [![Codecov](https://codecov.io/gh/goravel/gin/branch/master/graph/badge.svg)](https://codecov.io/gh/goravel/gin)
 ![License](https://img.shields.io/github/license/goravel/gin)
 

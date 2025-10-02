@@ -713,35 +713,35 @@ func (s *ContextRequestSuite) TestInfo() {
 	s.Require().Nil(err)
 
 	code, body, _, _ := s.request(req)
-	s.Equal(`{"info":{"handler":"github.com/goravel/gin.(*ContextRequestSuite).TestInfo.func1","method":"GET","name":"test-info-get","path":"/info/{id}"}}`, body)
+	s.Equal(`{"info":{"handler":"github.com/tonidy/goravel-ginx.(*ContextRequestSuite).TestInfo.func1","method":"GET","name":"test-info-get","path":"/info/{id}"}}`, body)
 	s.Equal(http.StatusOK, code)
 
 	req, err = http.NewRequest("HEAD", "/info/1", nil)
 	s.Require().Nil(err)
 
 	code, body, _, _ = s.request(req)
-	s.Equal(`{"info":{"handler":"github.com/goravel/gin.(*ContextRequestSuite).TestInfo.func1","method":"HEAD","name":"test-info-get","path":"/info/{id}"}}`, body)
+	s.Equal(`{"info":{"handler":"github.com/tonidy/goravel-ginx.(*ContextRequestSuite).TestInfo.func1","method":"HEAD","name":"test-info-get","path":"/info/{id}"}}`, body)
 	s.Equal(http.StatusOK, code)
 
 	req, err = http.NewRequest("POST", "/info/1", nil)
 	s.Require().Nil(err)
 
 	code, body, _, _ = s.request(req)
-	s.Equal(`{"info":{"handler":"github.com/goravel/gin.(*ContextRequestSuite).TestInfo.func2","method":"POST","name":"test-info-post","path":"/info/{id}"}}`, body)
+	s.Equal(`{"info":{"handler":"github.com/tonidy/goravel-ginx.(*ContextRequestSuite).TestInfo.func2","method":"POST","name":"test-info-post","path":"/info/{id}"}}`, body)
 	s.Equal(http.StatusOK, code)
 
 	req, err = http.NewRequest("GET", "/info/any/1", nil)
 	s.Require().Nil(err)
 
 	code, body, _, _ = s.request(req)
-	s.Equal(`{"info":{"handler":"github.com/goravel/gin.(*ContextRequestSuite).TestInfo.func3","method":"GET","name":"test-info-any","path":"/info/any/{id}"}}`, body)
+	s.Equal(`{"info":{"handler":"github.com/tonidy/goravel-ginx.(*ContextRequestSuite).TestInfo.func3","method":"GET","name":"test-info-any","path":"/info/any/{id}"}}`, body)
 	s.Equal(http.StatusOK, code)
 
 	req, err = http.NewRequest("POST", "/info/resource/1", nil)
 	s.Require().Nil(err)
 
 	code, body, _, _ = s.request(req)
-	s.Equal(`{"info":{"handler":"github.com/goravel/gin.(*ContextRequestSuite).TestInfo.func4","method":"POST","name":"test-info-resource","path":"/info/resource/{id}"}}`, body)
+	s.Equal(`{"info":{"handler":"github.com/tonidy/goravel-ginx.(*ContextRequestSuite).TestInfo.func4","method":"POST","name":"test-info-resource","path":"/info/resource/{id}"}}`, body)
 	s.Equal(http.StatusOK, code)
 }
 

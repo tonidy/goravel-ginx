@@ -1,4 +1,4 @@
-module github.com/goravel/gin
+module github.com/tonidy/goravel-ginx
 
 go 1.24.2
 

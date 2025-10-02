@@ -3,7 +3,7 @@ package facades
 import (
 	"log"
 
-	"github.com/goravel/gin"
+	"github.com/tonidy/goravel-ginx"
 
 	"github.com/goravel/framework/contracts/route"
 )

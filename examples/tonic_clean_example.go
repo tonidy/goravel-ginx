@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	contractshttp "github.com/goravel/framework/contracts/http"
-	ginx "github.com/goravel/gin"
-	"github.com/goravel/gin/facades"
+	ginx "github.com/tonidy/goravel-ginx"
+	"github.com/tonidy/goravel-ginx/facades"
 )
 
 // Clean example request/response types
