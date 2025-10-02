@@ -26,12 +26,12 @@ func main() {
 	packages.Setup(os.Args).
 		Install(
 			modify.GoFile(path.Config("app.go")).
-				Find(match.Imports()).Modify(modify.AddImport(packages.GetModulePath())).
+				Find(match.Imports()).Modify(modify.AddImport(packages.GetModulePath(), "ginx")).
 				Find(match.Providers()).Modify(modify.Register("&ginx.ServiceProvider{}")),
 			modify.GoFile(path.Config("http.go")).
 				Find(match.Imports()).
 				Modify(
-					modify.AddImport("github.com/goravel/framework/contracts/route"), modify.AddImport(packages.GetModulePath()),
+					modify.AddImport("github.com/goravel/framework/contracts/route"), modify.AddImport(packages.GetModulePath(), "ginx"),
 					modify.AddImport("github.com/tonidy/goravel-ginx/facades", "ginxfacades"), modify.AddImport("github.com/gin-gonic/gin/render"),
 				).
 				Find(match.Config("http.drivers")).Modify(modify.AddConfig("ginx", config)).
@@ -40,13 +40,13 @@ func main() {
 		Uninstall(
 			modify.GoFile(path.Config("app.go")).
 				Find(match.Providers()).Modify(modify.Unregister("&ginx.ServiceProvider{}")).
-				Find(match.Imports()).Modify(modify.RemoveImport(packages.GetModulePath())),
+				Find(match.Imports()).Modify(modify.RemoveImport(packages.GetModulePath(), "ginx")),
 			modify.GoFile(path.Config("http.go")).
 				Find(match.Config("http.drivers")).Modify(modify.RemoveConfig("ginx")).
 				Find(match.Config("http")).Modify(modify.AddConfig("default", `""`)).
 				Find(match.Imports()).
 				Modify(
-					modify.RemoveImport("github.com/goravel/framework/contracts/route"), modify.RemoveImport(packages.GetModulePath()),
+					modify.RemoveImport("github.com/goravel/framework/contracts/route"), modify.RemoveImport(packages.GetModulePath(), "ginx"),
 					modify.RemoveImport("github.com/tonidy/goravel-ginx/facades", "ginxfacades"), modify.RemoveImport("github.com/gin-gonic/gin/render"),
 				),
 		).
