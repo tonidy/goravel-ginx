@@ -18,7 +18,7 @@ var config = `map[string]any{
         },
         // Optional, default is http/template
         "template": func() (render.HTMLRender, error) {
-            return gin.DefaultTemplate()
+            return ginx.DefaultTemplate()
         },
     }`
 
