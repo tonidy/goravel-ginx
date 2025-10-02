@@ -14,7 +14,7 @@ var config = `map[string]any{
         "body_limit": 4096,
         "header_limit": 4096,
         "route": func() (route.Route, error) {
-            return ginfacades.Route("gin"), nil
+            return ginfacades.Route("ginx"), nil
         },
         // Optional, default is http/template
         "template": func() (render.HTMLRender, error) {
@@ -34,15 +34,15 @@ func main() {
 					modify.AddImport("github.com/goravel/framework/contracts/route"), modify.AddImport(packages.GetModulePath()),
 					modify.AddImport("github.com/goravel/gin/facades", "ginfacades"), modify.AddImport("github.com/gin-gonic/gin/render"),
 				).
-				Find(match.Config("http.drivers")).Modify(modify.AddConfig("gin", config)).
-				Find(match.Config("http")).Modify(modify.AddConfig("default", `"gin"`)),
+				Find(match.Config("http.drivers")).Modify(modify.AddConfig("ginx", config)).
+				Find(match.Config("http")).Modify(modify.AddConfig("default", `"ginx"`)),
 		).
 		Uninstall(
 			modify.GoFile(path.Config("app.go")).
 				Find(match.Providers()).Modify(modify.Unregister("&gin.ServiceProvider{}")).
 				Find(match.Imports()).Modify(modify.RemoveImport(packages.GetModulePath())),
 			modify.GoFile(path.Config("http.go")).
-				Find(match.Config("http.drivers")).Modify(modify.RemoveConfig("gin")).
+				Find(match.Config("http.drivers")).Modify(modify.RemoveConfig("ginx")).
 				Find(match.Config("http")).Modify(modify.AddConfig("default", `""`)).
 				Find(match.Imports()).
 				Modify(
