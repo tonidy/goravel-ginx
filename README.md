@@ -24,7 +24,7 @@ Gin http driver for Goravel.
 Run the command below in your project to install the package automatically:
 
 ```
-./artisan package:install github.com/goravel/gin
+./artisan package:install github.com/tonidy/goravel-ginx
 ```
 
 Or check [the setup file](./setup/setup.go) to install the package manually.
