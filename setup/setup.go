@@ -27,7 +27,7 @@ func main() {
 		Install(
 			modify.GoFile(path.Config("app.go")).
 				Find(match.Imports()).Modify(modify.AddImport(packages.GetModulePath())).
-				Find(match.Providers()).Modify(modify.Register("&gin.ServiceProvider{}")),
+				Find(match.Providers()).Modify(modify.Register("&ginx.ServiceProvider{}")),
 			modify.GoFile(path.Config("http.go")).
 				Find(match.Imports()).
 				Modify(
@@ -39,7 +39,7 @@ func main() {
 		).
 		Uninstall(
 			modify.GoFile(path.Config("app.go")).
-				Find(match.Providers()).Modify(modify.Unregister("&gin.ServiceProvider{}")).
+				Find(match.Providers()).Modify(modify.Unregister("&ginx.ServiceProvider{}")).
 				Find(match.Imports()).Modify(modify.RemoveImport(packages.GetModulePath())),
 			modify.GoFile(path.Config("http.go")).
 				Find(match.Config("http.drivers")).Modify(modify.RemoveConfig("ginx")).
