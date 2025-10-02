@@ -18,5 +18,5 @@ func Route(driver string) route.Route {
 		return nil
 	}
 
-	return instance.(*gin.Route)
+	return instance.(route.Route)
 }

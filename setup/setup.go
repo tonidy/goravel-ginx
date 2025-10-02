@@ -14,7 +14,7 @@ var config = `map[string]any{
         "body_limit": 4096,
         "header_limit": 4096,
         "route": func() (route.Route, error) {
-            return ginxfacades.Route("ginx"), nil
+            return ginxfacades.Route("gin"), nil
         },
         // Optional, default is http/template
         "template": func() (render.HTMLRender, error) {
