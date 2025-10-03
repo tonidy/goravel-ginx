@@ -5,7 +5,6 @@ go 1.24.2
 toolchain go1.25.1
 
 require (
-	github.com/TickLabVN/tonic/adapters/gin v0.0.0-20250706014441-7ee484a26b64
 	github.com/TickLabVN/tonic/core v0.0.0-20250706014441-7ee484a26b64
 	github.com/gin-gonic/gin v1.11.0
 	github.com/gookit/validate v1.5.6

@@ -37,8 +37,6 @@ github.com/RichardKnop/logging v0.0.0-20190827224416-1a693bdd4fae h1:DcFpTQBYQ9C
 github.com/RichardKnop/logging v0.0.0-20190827224416-1a693bdd4fae/go.mod h1:rJJ84PyA/Wlmw1hO+xTzV2wsSUon6J5ktg0g8BF2PuU=
 github.com/RichardKnop/machinery/v2 v2.0.13 h1:uo9htg+qNBi7UeUK3jcTBl3vTO/vvLKGaOdCOKePl50=
 github.com/RichardKnop/machinery/v2 v2.0.13/go.mod h1:Yc2X/QRm9rRfAjB+93NGR+kSUqtnqqs8kME4L+TKKiw=
-github.com/TickLabVN/tonic/adapters/gin v0.0.0-20250706014441-7ee484a26b64 h1:O7dv25yt0G9ILXFs9WHyS4CV1IKJ2XGkVIlCa1WOBcQ=
-github.com/TickLabVN/tonic/adapters/gin v0.0.0-20250706014441-7ee484a26b64/go.mod h1:jlfAeuCsimtqToEGAWyZroveo+vb76yNi7ut98Lo+7Y=
 github.com/TickLabVN/tonic/core v0.0.0-20250706014441-7ee484a26b64 h1:5zPLZyFvIOMtLXEEauHGVdbI6R/tuYAxSByL9ck4ZYE=
 github.com/TickLabVN/tonic/core v0.0.0-20250706014441-7ee484a26b64/go.mod h1:812faBnKQMWvvMI2K2RdmZLPrP9j0YZfaajY9xl/T4U=
 github.com/atomicgo/cursor v0.0.1/go.mod h1:cBON2QmmrysudxNBFthvMtN32r3jxVRIvzkUiF/RuIk=

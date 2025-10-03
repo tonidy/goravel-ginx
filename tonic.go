@@ -3,11 +3,12 @@ package gin
 import (
 	"net/http"
 
-	ginAdapter "github.com/TickLabVN/tonic/adapters/gin"
 	"github.com/TickLabVN/tonic/core/docs"
 	"github.com/gin-gonic/gin"
+
 	contractshttp "github.com/goravel/framework/contracts/http"
 	contractsroute "github.com/goravel/framework/contracts/route"
+	ginAdapter "github.com/tonidy/goravel-ginx/tonicadapter"
 )
 
 // TonicRoute represents a Tonic-enabled route configuration

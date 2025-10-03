@@ -13,6 +13,9 @@ func TestContext(t *testing.T) {
 	type customType struct{}
 	var customTypeKey customType
 
+	type contextKey string
+	const userContextKey contextKey = "user_a"
+
 	ginCtx, _ := gin.CreateTestContext(httptest.NewRecorder())
 	ginCtx.Request = httptest.NewRequest("GET", "/", nil)
 	httpCtx := NewContext(ginCtx)
@@ -21,8 +24,7 @@ func TestContext(t *testing.T) {
 	httpCtx.WithValue(customTypeKey, "halo")
 
 	userContext := context.Background()
-	//nolint:all
-	userContext = context.WithValue(userContext, "user_a", "b")
+	userContext = context.WithValue(userContext, userContextKey, "b")
 	httpCtx.WithContext(userContext)
 
 	httpCtx.WithValue(1, "one")
@@ -35,14 +37,14 @@ func TestContext(t *testing.T) {
 	assert.Equal(t, "two point two", httpCtx.Value(2.2))
 
 	// The value of UserContext can't be covered.
-	assert.Equal(t, "b", httpCtx.Value("user_a"))
+	assert.Equal(t, "b", httpCtx.Value(userContextKey))
 
 	ctx := httpCtx.Context()
 
 	assert.Equal(t, "world", ctx.Value("Hello"))
 	assert.Equal(t, "Goravel", ctx.Value("Hi"))
 	assert.Equal(t, "halo", ctx.Value(customTypeKey))
-	assert.Equal(t, "b", ctx.Value("user_a"))
+	assert.Equal(t, "b", ctx.Value(userContextKey))
 	assert.Equal(t, "one", ctx.Value(1))
 	assert.Equal(t, "two point two", ctx.Value(2.2))
 }
