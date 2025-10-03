@@ -28,7 +28,6 @@ func (r *ServiceProvider) Relationship() binding.Relationship {
 	return binding.Relationship{
 		Bindings: []string{
 			BindingRoute,
-			BindingOpenApi,
 		},
 		Dependencies: []string{
 			binding.Config,
@@ -45,7 +44,7 @@ func (r *ServiceProvider) Relationship() binding.Relationship {
 func (r *ServiceProvider) Register(app foundation.Application) {
 	App = app
 
-	app.BindWith(BindingOpenApi, func(app foundation.Application, parameters map[string]any) (any, error) {
+	app.Singleton(BindingOpenApi, func(app foundation.Application) (any, error) {
 		cfg := app.MakeConfig()
 
 		openapi := &docs.OpenApi{
@@ -90,11 +89,14 @@ func (r *ServiceProvider) Boot(app foundation.Application) {
 	ViewFacade = app.MakeView()
 
 	// Initialize OpenAPI instance if not already done
+	// Skip if binding doesn't exist (e.g., during package installation)
 	if OpenApiInstance == nil {
-		if instance, err := app.Make(BindingOpenApi); err == nil {
+		instance, err := app.Make(BindingOpenApi)
+		if err == nil {
 			if openapi, ok := instance.(*docs.OpenApi); ok {
 				OpenApiInstance = openapi
 			}
 		}
+		// Silently ignore errors - binding might not be available during installation
 	}
 }
