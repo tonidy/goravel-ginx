@@ -37,7 +37,7 @@ func TestView_Make(t *testing.T) {
 	beforeEach := func() {
 		mockConfig = &configmocks.Config{}
 		mockConfig.On("GetBool", "app.debug").Return(false).Once()
-		mockConfig.On("GetInt", "http.drivers.gin.body_limit", 4096).Return(4096).Once()
+		mockConfig.On("GetInt", "http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 		ConfigFacade = mockConfig
 
 		mockView = &httpmocks.View{}
@@ -257,7 +257,7 @@ func TestView_First(t *testing.T) {
 	beforeEach := func() {
 		mockConfig = &configmocks.Config{}
 		mockConfig.On("GetBool", "app.debug").Return(false).Once()
-		mockConfig.On("GetInt", "http.drivers.gin.body_limit", 4096).Return(4096).Once()
+		mockConfig.On("GetInt", "http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 		ConfigFacade = mockConfig
 
 		mockView = &httpmocks.View{}
@@ -387,7 +387,7 @@ csrf_token={{ .csrf_token }}
 `))
 	mockConfig := configmocks.NewConfig(t)
 	mockConfig.EXPECT().GetBool("app.debug").Return(false).Once()
-	mockConfig.EXPECT().GetInt("http.drivers.gin.body_limit", 4096).Return(4096).Once()
+	mockConfig.EXPECT().GetInt("http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 	ConfigFacade = mockConfig
 
 	mockView := httpmocks.NewView(t)

@@ -35,7 +35,7 @@ func TestRouteTestSuite(t *testing.T) {
 func (s *RouteTestSuite) SetupTest() {
 	s.mockConfig = configmocks.NewConfig(s.T())
 	s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-	s.mockConfig.EXPECT().GetInt("http.drivers.gin.body_limit", 4096).Return(4096).Once()
+	s.mockConfig.EXPECT().GetInt("http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 
 	route, err := NewRoute(s.mockConfig, nil)
 	s.Require().Nil(err)
@@ -127,7 +127,7 @@ func (s *RouteTestSuite) TestGlobalMiddleware() {
 
 func (s *RouteTestSuite) TestListen() {
 	s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-	s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+	s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 
 	s.route.Get("/", func(ctx contractshttp.Context) contractshttp.Response {
 		return ctx.Response().Json(200, contractshttp.Json{
@@ -162,7 +162,7 @@ func (s *RouteTestSuite) TestListenTLS() {
 		})
 	})
 
-	s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+	s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 	s.mockConfig.EXPECT().GetString("http.tls.ssl.cert").Return("test_ca.crt").Once()
 	s.mockConfig.EXPECT().GetString("http.tls.ssl.key").Return("test_ca.key").Once()
 	s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
@@ -198,7 +198,7 @@ func (s *RouteTestSuite) TestListenTLSWithCert() {
 	})
 
 	s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-	s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+	s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 
 	go func() {
 		l, err := net.Listen("tcp", "127.0.0.1:3104")
@@ -263,7 +263,7 @@ func (s *RouteTestSuite) TestRun() {
 		s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
 		s.mockConfig.EXPECT().GetString("http.host").Return(host).Once()
 		s.mockConfig.EXPECT().GetString("http.port").Return(port).Once()
-		s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+		s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 
 		var err error
 
@@ -299,7 +299,7 @@ func (s *RouteTestSuite) TestRun() {
 		})
 
 		s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-		s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+		s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 
 		var err error
 
@@ -352,7 +352,7 @@ func (s *RouteTestSuite) TestRunTLS() {
 		addr := "https://" + host + ":" + port
 
 		s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-		s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+		s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 		s.mockConfig.EXPECT().GetString("http.tls.host").Return(host).Once()
 		s.mockConfig.EXPECT().GetString("http.tls.port").Return(port).Once()
 		s.mockConfig.EXPECT().GetString("http.tls.ssl.cert").Return("test_ca.crt").Once()
@@ -398,7 +398,7 @@ func (s *RouteTestSuite) TestRunTLS() {
 		port := "3034"
 		addr := "https://" + host + ":" + port
 
-		s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+		s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 		s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
 		s.mockConfig.EXPECT().GetString("http.tls.ssl.cert").Return("test_ca.crt").Once()
 		s.mockConfig.EXPECT().GetString("http.tls.ssl.key").Return("test_ca.key").Once()
@@ -469,7 +469,7 @@ func (s *RouteTestSuite) TestRunTLSWithCert() {
 			})
 		})
 
-		s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+		s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 		s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
 
 		var (
@@ -524,17 +524,17 @@ func (s *RouteTestSuite) TestNewRoute() {
 		},
 		{
 			name:       "template is instance",
-			parameters: map[string]any{"driver": "gin"},
+			parameters: map[string]any{"driver": "ginx"},
 			setup: func() {
-				s.mockConfig.EXPECT().Get("http.drivers.gin.template").Return(defaultTemplate).Once()
+				s.mockConfig.EXPECT().Get("http.drivers.ginx.template").Return(defaultTemplate).Once()
 			},
 			expectHTMLRender: defaultTemplate,
 		},
 		{
 			name:       "template is callback and returns success",
-			parameters: map[string]any{"driver": "gin"},
+			parameters: map[string]any{"driver": "ginx"},
 			setup: func() {
-				s.mockConfig.EXPECT().Get("http.drivers.gin.template").Return(func() (render.HTMLRender, error) {
+				s.mockConfig.EXPECT().Get("http.drivers.ginx.template").Return(func() (render.HTMLRender, error) {
 					return defaultTemplate, nil
 				}).Twice()
 			},
@@ -542,9 +542,9 @@ func (s *RouteTestSuite) TestNewRoute() {
 		},
 		{
 			name:       "template is callback and returns error",
-			parameters: map[string]any{"driver": "gin"},
+			parameters: map[string]any{"driver": "ginx"},
 			setup: func() {
-				s.mockConfig.EXPECT().Get("http.drivers.gin.template").Return(func() (render.HTMLRender, error) {
+				s.mockConfig.EXPECT().Get("http.drivers.ginx.template").Return(func() (render.HTMLRender, error) {
 					return nil, errors.New("error")
 				}).Twice()
 			},
@@ -557,7 +557,7 @@ func (s *RouteTestSuite) TestNewRoute() {
 			s.SetupTest()
 
 			s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-			s.mockConfig.EXPECT().GetInt("http.drivers.gin.body_limit", 4096).Return(4096).Once()
+			s.mockConfig.EXPECT().GetInt("http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 			test.setup()
 			route, err := NewRoute(s.mockConfig, test.parameters)
 			s.Equal(test.expectError, err)
@@ -581,7 +581,7 @@ func (s *RouteTestSuite) TestShutdown() {
 		})
 
 		s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-		s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+		s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 		s.mockConfig.EXPECT().GetString("http.host").Return(host).Once()
 		s.mockConfig.EXPECT().GetString("http.port").Return(port).Once()
 
@@ -619,7 +619,7 @@ func (s *RouteTestSuite) TestShutdown() {
 		})
 
 		s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-		s.mockConfig.EXPECT().GetInt("http.drivers.gin.header_limit", 4096).Return(4096).Once()
+		s.mockConfig.EXPECT().GetInt("http.drivers.ginx.header_limit", 4096).Return(4096).Once()
 		s.mockConfig.EXPECT().GetString("http.host").Return(host).Once()
 		s.mockConfig.EXPECT().GetString("http.port").Return(port).Once()
 

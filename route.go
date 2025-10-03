@@ -40,7 +40,7 @@ func NewRoute(config config.Config, parameters map[string]any) (*Route, error) {
 	gin.SetMode(gin.ReleaseMode)
 	gin.DisableBindValidation()
 	engine := gin.New()
-	engine.MaxMultipartMemory = int64(config.GetInt("http.drivers.gin.body_limit", 4096)) << 10
+	engine.MaxMultipartMemory = int64(config.GetInt("http.drivers.ginx.body_limit", 4096)) << 10
 	engine.Use(gin.Recovery()) // recovery middleware
 
 	if debugLog := getDebugLog(config); debugLog != nil {
@@ -141,7 +141,7 @@ func (r *Route) Listen(l net.Listener) error {
 	r.server = &http.Server{
 		Addr:           l.Addr().String(),
 		Handler:        http.AllowQuerySemicolons(r.instance),
-		MaxHeaderBytes: r.config.GetInt("http.drivers.gin.header_limit", 4096) << 10,
+		MaxHeaderBytes: r.config.GetInt("http.drivers.ginx.header_limit", 4096) << 10,
 	}
 
 	if err := r.server.Serve(l); !errors.Is(err, http.ErrServerClosed) {
@@ -162,7 +162,7 @@ func (r *Route) ListenTLSWithCert(l net.Listener, certFile, keyFile string) erro
 	r.tlsServer = &http.Server{
 		Addr:           l.Addr().String(),
 		Handler:        http.AllowQuerySemicolons(r.instance),
-		MaxHeaderBytes: r.config.GetInt("http.drivers.gin.header_limit", 4096) << 10,
+		MaxHeaderBytes: r.config.GetInt("http.drivers.ginx.header_limit", 4096) << 10,
 	}
 
 	if err := r.tlsServer.ServeTLS(l, certFile, keyFile); !errors.Is(err, http.ErrServerClosed) {
@@ -201,7 +201,7 @@ func (r *Route) Run(host ...string) error {
 	r.server = &http.Server{
 		Addr:           host[0],
 		Handler:        http.AllowQuerySemicolons(r.instance),
-		MaxHeaderBytes: r.config.GetInt("http.drivers.gin.header_limit", 4096) << 10,
+		MaxHeaderBytes: r.config.GetInt("http.drivers.ginx.header_limit", 4096) << 10,
 	}
 
 	if err := r.server.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
@@ -242,7 +242,7 @@ func (r *Route) RunTLSWithCert(host, certFile, keyFile string) error {
 	r.tlsServer = &http.Server{
 		Addr:           host,
 		Handler:        http.AllowQuerySemicolons(r.instance),
-		MaxHeaderBytes: r.config.GetInt("http.drivers.gin.header_limit", 4096) << 10,
+		MaxHeaderBytes: r.config.GetInt("http.drivers.ginx.header_limit", 4096) << 10,
 	}
 
 	if err := r.tlsServer.ListenAndServeTLS(certFile, keyFile); !errors.Is(err, http.ErrServerClosed) {

@@ -286,7 +286,7 @@ openapi := facades.OpenApi()
 openapi := ginx.OpenApiInstance
 
 // 3. Via application make
-instance, _ := facades.App().Make("goravel.gin.openapi")
+instance, _ := facades.App().Make("goravel.ginx.openapi")
 openapi := instance.(*docs.OpenApi)
 ```
 

@@ -10,8 +10,8 @@ import (
 	"github.com/goravel/framework/contracts/validation"
 )
 
-const BindingRoute = "goravel.gin.route"
-const BindingOpenApi = "goravel.gin.openapi"
+const BindingRoute = "goravel.ginx.route"
+const BindingOpenApi = "goravel.ginx.openapi"
 
 var (
 	App              foundation.Application

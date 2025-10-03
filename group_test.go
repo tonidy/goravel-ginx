@@ -26,7 +26,7 @@ func (s *GroupTestSuite) SetupTest() {
 
 	s.mockConfig = configmocks.NewConfig(s.T())
 	s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-	s.mockConfig.EXPECT().GetInt("http.drivers.gin.body_limit", 4096).Return(4096).Once()
+	s.mockConfig.EXPECT().GetInt("http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 	ConfigFacade = s.mockConfig
 
 	route, err := NewRoute(s.mockConfig, nil)

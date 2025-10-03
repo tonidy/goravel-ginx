@@ -14,7 +14,11 @@ var config = `map[string]any{
         "body_limit": 4096,
         "header_limit": 4096,
         "route": func() (route.Route, error) {
-            return ginxfacades.Route("gin"), nil
+            r := ginxfacades.Route("ginx")
+            if r == nil {
+                return nil, errors.New("failed to initialize ginx route")
+            }
+            return r, nil
         },
         // Optional, default is http/template
         "template": func() (render.HTMLRender, error) {
@@ -26,6 +30,7 @@ func main() {
 	packages.Setup(os.Args).
 		Install(
 			modify.GoFile(path.Config("app.go")).
+				Find(match.Imports()).Modify(modify.AddImport("errors")).
 				Find(match.Imports()).Modify(modify.AddImport(packages.GetModulePath(), "ginx")).
 				Find(match.Providers()).Modify(modify.Register("&ginx.ServiceProvider{}")),
 			modify.GoFile(path.Config("http.go")).

@@ -40,7 +40,7 @@ func TestContextRequestSuite(t *testing.T) {
 func (s *ContextRequestSuite) SetupTest() {
 	s.mockConfig = &mocksconfig.Config{}
 	s.mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-	s.mockConfig.EXPECT().GetInt("http.drivers.gin.body_limit", 4096).Return(4096).Once()
+	s.mockConfig.EXPECT().GetInt("http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 	ValidationFacade = validation.NewValidation()
 
 	var err error

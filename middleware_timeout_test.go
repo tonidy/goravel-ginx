@@ -17,7 +17,7 @@ import (
 func TestTimeoutMiddleware(t *testing.T) {
 	mockConfig := mocksconfig.NewConfig(t)
 	mockConfig.EXPECT().GetBool("app.debug").Return(true).Once()
-	mockConfig.EXPECT().GetInt("http.drivers.gin.body_limit", 4096).Return(4096).Once()
+	mockConfig.EXPECT().GetInt("http.drivers.ginx.body_limit", 4096).Return(4096).Once()
 
 	route, err := NewRoute(mockConfig, nil)
 	require.NoError(t, err)
