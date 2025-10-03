@@ -28,6 +28,7 @@ func (r *ServiceProvider) Relationship() binding.Relationship {
 	return binding.Relationship{
 		Bindings: []string{
 			BindingRoute,
+			BindingOpenApi,
 		},
 		Dependencies: []string{
 			binding.Config,
