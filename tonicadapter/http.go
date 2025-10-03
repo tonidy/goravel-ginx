@@ -15,7 +15,7 @@ import (
 func registerSwaggerRoutes(router gin.IRoutes, spec *docs.OpenApi, path string) {
 	swaggerPath := fmt.Sprintf("%s.json", path)
 	router.GET(swaggerPath, gin.WrapH(core.JsonHttpHandler(spec)))
-	router.GET(fmt.Sprintf("%s/*subpaths", path), gin.WrapH(core.SwaggerUIHandler(swaggerPath)))
+	router.GET(fmt.Sprintf("%s/*any", path), gin.WrapH(core.SwaggerUIHandler(swaggerPath)))
 }
 
 // registerSwaggerRoutesWithFacades registers Swagger JSON and UI routes using Goravel facades
@@ -33,7 +33,7 @@ func registerSwaggerRoutesWithFacades(router route.Route, spec *docs.OpenApi, pa
 		return nil
 	})
 
-	router.Get(fmt.Sprintf("%s/*subpaths", path), func(ctx http.Context) http.Response {
+	router.Get(fmt.Sprintf("%s/*any", path), func(ctx http.Context) http.Response {
 		w := ctx.Response().Writer()
 		r := ctx.Request().Origin()
 		uiHandler.ServeHTTP(w, r)
